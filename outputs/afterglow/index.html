@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#161512">
+  <meta name="description" content="Afterglow，好故事，自有余韵。每天一部精选电影或剧集，在今日一幕里，遇见值得留下的故事。">
+  <meta property="og:title" content="Afterglow · 好故事，自有余韵。">
+  <meta property="og:description" content="电影与剧集，每日一幕。遇见值得留下的故事。">
+  <meta property="og:type" content="website">
+  <title>Afterglow · 好故事，自有余韵。</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="showreel.css">
+  <script>
+    try { if (localStorage.getItem('theme') === 'light') document.documentElement.dataset.theme = 'light'; } catch (_) {}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到今日推荐</a>
+  <div class="page">
+    <header class="page-header">
+      <a class="brand" href="./" aria-label="Afterglow 首页">
+        <svg class="brand-mark" width="38" height="38" viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M7 23a13 13 0 0 1 26 0" stroke="currentColor" stroke-width="1.5"/><path d="M3 23h34M8 29h24M14 34h12" stroke="currentColor" stroke-width="1.5"/><path d="M20 3v4M5 10l3 3M35 10l-3 3" stroke="currentColor" stroke-width="1.5"/></svg>
+        <span><span class="site-title">Afterglow<span class="brand-dot">.</span></span><span class="brand-tagline">好故事，自有余韵。</span></span>
+      </a>
+      <nav class="header-actions" aria-label="网站导航">
+        <button class="library-btn" id="library-btn" type="button"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="3" width="5" height="14" rx="1"/><rect x="11" y="3" width="5" height="14" rx="1"/></svg>探索片库 <span id="library-total"></span></button>
+        <button class="theme-btn" id="theme-btn" type="button" aria-label="切换到日间模式">日间模式</button>
+      </nav>
+    </header>
+
+    <main id="main" tabindex="-1">
+      <section class="daily-section" aria-labelledby="daily-title">
+        <div class="section-topline">
+          <div class="section-heading"><span class="eyebrow">THE DAILY SELECTION</span><h1 id="daily-title">今日一幕<span class="heading-dot">・</span></h1></div>
+          <div class="date-nav" aria-label="浏览每日推荐">
+            <button class="nav-btn" id="prev-day" type="button" aria-label="前一天">←</button>
+            <div class="date-wrap"><time class="date" id="date"></time><button class="today-btn" id="today-btn" type="button" hidden>回到今天</button></div>
+            <button class="nav-btn" id="next-day" type="button" aria-label="后一天">→</button>
+          </div>
+        </div>
+        <div class="selection-toolbar">
+          <div class="media-tabs" id="media-tabs" role="group" aria-label="推荐范围">
+            <button type="button" data-media="all" aria-pressed="true">全部</button>
+            <button type="button" data-media="movie" aria-pressed="false">电影</button>
+            <button type="button" data-media="tv" aria-pressed="false">剧集</button>
+          </div>
+          <p class="selection-note" id="selection-note">每天，留一点时间给好故事。</p>
+        </div>
+        <section class="card" id="card" aria-label="推荐作品"></section>
+        <div class="showreel-entry"><button class="text-btn" id="showreel-open" type="button"><span aria-hidden="true">▷</span> 看看 Afterglow 如何选片 <span class="showreel-duration">30 秒</span></button></div>
+        <div class="daily-footnote"><span id="daily-context">一日一选 · 慢慢看，好好感受</span><button class="text-btn" id="back-daily" type="button" hidden>回到每日推荐 ↗</button><span class="edition-mark">CURATED BY AFTERGLOW</span></div>
+      </section>
+
+      <section class="collection" id="collection" hidden aria-label="人物作品合集"></section>
+
+      <section class="random-section" aria-labelledby="discover-title">
+        <div class="discover-head"><div><span class="eyebrow">FOLLOW YOUR CURIOSITY</span><h2 id="discover-title">换一种心情，遇见另一幕。</h2></div><div class="random-actions"><button class="random-btn big primary" data-kind="any" type="button">为我选一部 <span aria-hidden="true">↗</span></button><button class="random-btn big" data-kind="cold" type="button">冷门佳作</button></div></div>
+        <div class="random-group"><span class="random-label">偏爱什么</span><div class="random-tags">
+          <button class="random-tag" data-type="爱情" type="button">爱情</button><button class="random-tag" data-type="喜剧" type="button">喜剧</button><button class="random-tag" data-type="科幻" type="button">科幻</button><button class="random-tag" data-type="悬疑" type="button">悬疑</button><button class="random-tag" data-type="犯罪" type="button">犯罪</button><button class="random-tag" data-type="动画" type="button">动画</button><button class="random-tag" data-type="动作" type="button">动作</button><button class="random-tag" data-type="战争" type="button">战争</button>
+        </div></div>
+        <details class="decade-disclosure"><summary>按年代寻找</summary><div class="random-tags"><button class="random-tag" data-decade="2020" type="button">2020 年代</button><button class="random-tag" data-decade="2010" type="button">2010 年代</button><button class="random-tag" data-decade="2000" type="button">2000 年代</button><button class="random-tag" data-decade="1990" type="button">1990 年代</button><button class="random-tag" data-decade="old" type="button">更早</button></div></details>
+        <div class="random-result" id="random-result" hidden aria-live="polite"></div>
+      </section>
+
+      <section class="series-section" id="series-section" hidden aria-labelledby="series-title"></section>
+      <section class="chart-section" id="chart" hidden aria-label="电影口碑榜"></section>
+    </main>
+
+    <footer class="page-footer"><div class="footer-brand">Afterglow<span>好故事，自有余韵。</span></div><div><p>电影：豆瓣 Top 250 / TMDB · 剧集：TMDB / <a href="https://www.tvmaze.com/" target="_blank" rel="noopener">TVmaze</a>（<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA</a>）</p><p class="disclaimer">仅供学习交流。作品资料与海报版权归原作者及来源平台所有。</p></div></footer>
+  </div>
+
+  <div class="library-overlay" id="library-overlay" hidden>
+    <section class="library-panel" role="dialog" aria-modal="true" aria-labelledby="library-title">
+      <div class="library-head"><div><span class="eyebrow">THE COLLECTION</span><h2 class="library-title" id="library-title">探索片库</h2></div><button class="library-close" id="library-close" type="button" aria-label="关闭片库">×</button></div>
+      <label class="sr-only" for="library-search">搜索片名、导演或演员</label><input class="library-search" id="library-search" type="search" placeholder="搜索片名、导演或演员…" autocomplete="off">
+      <div class="library-filters">
+        <div class="library-row"><span class="library-label">作品</span><div class="library-tags" id="library-media"></div></div>
+        <div class="library-row" id="library-region-row" hidden><span class="library-label">地区</span><div class="library-tags" id="library-region"></div></div>
+        <div class="library-row"><span class="library-label">类型</span><div class="library-tags" id="library-genres"></div></div>
+        <div class="library-row"><span class="library-label">年代</span><div class="library-tags" id="library-decades"></div></div>
+        <div class="library-row"><span class="library-label">排序</span><div class="library-tags" id="library-sort"></div></div>
+      </div>
+      <p class="library-count" id="library-count" aria-live="polite"></p><div class="library-grid" id="library-grid"></div>
+    </section>
+  </div>
+  <dialog class="poster-viewer" id="poster-viewer" aria-labelledby="poster-viewer-title">
+    <img class="poster-ambient" id="poster-ambient" alt="" aria-hidden="true">
+    <button class="poster-viewer-close" id="poster-viewer-close" type="button" aria-label="关闭封面大图" autofocus>×</button>
+    <div class="poster-scene" id="poster-scene">
+      <div class="poster-depth" id="poster-depth">
+        <img class="poster-depth-shadow" id="poster-depth-shadow" alt="" aria-hidden="true">
+        <div class="poster-depth-face">
+          <span class="poster-depth-placeholder" id="poster-depth-placeholder"></span>
+          <img class="poster-depth-image" id="poster-depth-image" alt="">
+          <span class="poster-depth-glare" aria-hidden="true"></span>
+        </div>
+      </div>
+      <div class="poster-viewer-caption">
+        <span class="eyebrow">AFTERGLOW · COVER GALLERY</span>
+        <h2 id="poster-viewer-title"></h2>
+        <button class="text-btn" id="poster-viewer-work" type="button">查看作品介绍 ↗</button>
+      </div>
+    </div>
+  </dialog>
+  <dialog id="showreel-dialog" class="showreel-dialog" aria-labelledby="showreel-title">
+    <header class="showreel-head"><div><span class="showreel-wordmark">Afterglow<span>.</span></span><h2 id="showreel-title">从挑选，到心动。</h2></div><button id="showreel-close" type="button" aria-label="关闭产品演示" autofocus>×</button></header>
+    <div id="showreel-viewport" class="showreel-viewport"><div id="showreel-stage" class="showreel-stage" role="img" aria-label="Afterglow 选片过程演示"></div></div>
+    <div class="showreel-caption"><span id="showreel-step">每日一幕</span><p id="showreel-description">每天，遇见一个值得留下的故事。</p></div>
+    <div class="showreel-controls"><button id="showreel-play" type="button" aria-label="暂停演示">暂停</button><button id="showreel-replay" type="button">重播</button><label class="showreel-motion-label"><input id="showreel-motion" type="checkbox">减少动态</label><label class="sr-only" for="showreel-progress">演示进度</label><input id="showreel-progress" type="range" min="0" max="30" step="0.01" value="0" aria-valuetext="0 秒，共 30 秒"><output id="showreel-time" for="showreel-progress">00:00 / 00:30</output><button id="showreel-start" type="button">开始选片 ↗</button></div>
+    <p id="showreel-status" class="sr-only" role="status"></p>
+  </dialog>
+  <p class="toast" id="toast" role="status" hidden></p>
+  <noscript><p>请启用 JavaScript，以浏览 Afterglow 的每日推荐与片库。</p></noscript>
+  <script src="data.js"></script>
+  <script src="series.js"></script>
+  <script src="movie-series.js"></script>
+  <script src="app.js"></script>
+  <script src="showreel.js"></script>
+</body>
+</html>

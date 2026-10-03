@@ -1,0 +1,85 @@
+{
+  "fps": 30,
+  "duration_seconds": 30,
+  "duration_frames": 900,
+  "work_id": "tvmaze-tv-335-s1",
+  "source": "local catalog",
+  "delivery": "native website player",
+  "reference_scope": "10 bundled case sheets; 72-sheet author reference analysis was not performed",
+  "scenes": [
+    {
+      "id": "S1",
+      "name": "每日推荐",
+      "start_frame": 0,
+      "end_frame": 90,
+      "handoff": "推荐卡 → 探索片库",
+      "information": "推荐内容与片库入口"
+    },
+    {
+      "id": "S2",
+      "name": "剧集与地区筛选",
+      "start_frame": 82,
+      "end_frame": 225,
+      "handoff": "片库标签 → 真实候选列表",
+      "information": "310 → 60 → 15 个真实结果"
+    },
+    {
+      "id": "S3",
+      "name": "悬疑结果",
+      "start_frame": 216,
+      "end_frame": 375,
+      "handoff": "同一张夏洛克海报随筛选重排",
+      "information": "15 → 2 个真实结果"
+    },
+    {
+      "id": "S4",
+      "name": "封面展示",
+      "start_frame": 366,
+      "end_frame": 510,
+      "handoff": "海报放大进入封面展示",
+      "information": "原图、轻微倾斜、跟随光泽"
+    },
+    {
+      "id": "S5",
+      "name": "推荐详情",
+      "start_frame": 501,
+      "end_frame": 660,
+      "handoff": "海报进入推荐卡",
+      "information": "第1季、共3集、约90分钟/集、8.9整体评分"
+    },
+    {
+      "id": "S6",
+      "name": "分享卡",
+      "start_frame": 651,
+      "end_frame": 825,
+      "handoff": "海报缩进真实Canvas分享卡",
+      "information": "作品信息完整保留，不自动下载"
+    },
+    {
+      "id": "S7",
+      "name": "品牌收束",
+      "start_frame": 816,
+      "end_frame": 899,
+      "handoff": "分享卡 → 开始选片入口",
+      "information": "Afterglow：好故事，自有余韵"
+    }
+  ],
+  "motion_rules": {
+    "shared_poster_instance": true,
+    "background_motion": false,
+    "readable_holds_allowed": true,
+    "central_clock": "showreel.js: time / requestAnimationFrame",
+    "pause_stops_all_stage_motion": true,
+    "system_reduced_motion_default": true,
+    "responsive_stage": {
+      "desktop": [
+        1280,
+        720
+      ],
+      "portrait": [
+        720,
+        1000
+      ]
+    }
+  }
+}

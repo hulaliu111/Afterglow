@@ -1,0 +1,21 @@
+# 临时研究、缓存及本机编译产物
+/work/
+node_modules/
+__pycache__/
+*.py[cod]
+.catalog-cache/
+.DS_Store
+
+# 本地配置与凭据
+.env
+.env.*
+!.env.example
+config.local.json
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+
+# 子项目的本地 Git 元数据不上传
+**/.git/
