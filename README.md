@@ -19,4 +19,10 @@ python3 -m http.server 8765 --bind 127.0.0.1 --directory outputs/afterglow
 
 网站的数据维护和部署说明见 `outputs/afterglow/README.md`。部署时将网站根目录设为 `outputs/afterglow`。
 
+## GitHub Pages
+
+网站地址：<https://hulaliu111.github.io/Afterglow/>。
+
+仓库 Pages 的发布来源设为 **GitHub Actions**。`main` 分支上的网站文件更新后，`.github/workflows/deploy-pages.yml` 会自动发布；也可以在 Actions 中手动运行。发布内容只包含网站页面、脚本、样式、图标和海报。
+
 `work/` 中的临时文件、本机配置、凭据和 Git 编译产物不纳入版本管理。网站目录保留原有本地 Git 元数据；本仓库保存其实际文件，而非子模块引用。
