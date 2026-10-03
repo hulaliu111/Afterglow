@@ -370,7 +370,9 @@ function closeLibrary() {
 let posterOpener = null;
 let viewedPosterId = null;
 let posterFrame = 0;
-const posterMotion = matchMedia("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)");
+let posterPointer = null;
+const posterSurface = $("poster-depth");
+const posterMotion = matchMedia("(prefers-reduced-motion: no-preference)");
 function resetPosterDepth() {
   cancelAnimationFrame(posterFrame);
   $("poster-depth").style.setProperty("--tilt-x", "0deg");
@@ -409,8 +411,11 @@ $("poster-depth-image").addEventListener("error", () => {
   ["poster-depth-image", "poster-depth-shadow", "poster-ambient"].forEach(key => { $(key).hidden = true; });
 });
 function updatePosterDepth(e) {
-  if (!posterMotion.matches || e.pointerType === "touch") return;
-  const box = $("poster-depth").getBoundingClientRect();
+  if (!posterMotion.matches) return;
+  if (posterPointer && e.pointerId !== posterPointer.id) return;
+  if (e.pointerType === "touch" && !posterPointer) return;
+  // 拖动期间使用按下时的边界，避免倾斜改变尺寸后产生反馈抖动。
+  const box = posterPointer?.box || posterSurface.getBoundingClientRect();
   const x = Math.max(-1, Math.min(1, (e.clientX - box.left) / box.width * 2 - 1));
   const y = Math.max(-1, Math.min(1, (e.clientY - box.top) / box.height * 2 - 1));
   cancelAnimationFrame(posterFrame);
@@ -421,15 +426,40 @@ function updatePosterDepth(e) {
     $("poster-depth").style.setProperty("--light-y", `${(y + 1) * 50}%`);
   });
 }
+function endPosterDrag(e) {
+  if (!posterPointer || (e && e.pointerId !== posterPointer.id)) return;
+  const id = posterPointer.id;
+  posterPointer = null;
+  posterSurface.classList.remove("is-dragging");
+  if (posterSurface.hasPointerCapture(id)) posterSurface.releasePointerCapture(id);
+  resetPosterDepth();
+}
+posterSurface.addEventListener("pointerdown", e => {
+  if (!posterMotion.matches || e.isPrimary === false || posterPointer) return;
+  if (e.pointerType === "mouse" && e.button !== 0) return;
+  posterPointer = { id: e.pointerId, box: posterSurface.getBoundingClientRect() };
+  posterSurface.classList.add("is-dragging");
+  posterSurface.setPointerCapture(e.pointerId);
+  updatePosterDepth(e);
+});
+posterSurface.addEventListener("pointerup", endPosterDrag);
+posterSurface.addEventListener("pointercancel", endPosterDrag);
+posterSurface.addEventListener("lostpointercapture", endPosterDrag);
+posterSurface.addEventListener("dragstart", e => e.preventDefault());
 $("poster-scene").addEventListener("pointermove", updatePosterDepth);
-$("poster-scene").addEventListener("pointerdown", updatePosterDepth);
-$("poster-scene").addEventListener("pointerleave", resetPosterDepth);
-posterMotion.addEventListener("change", resetPosterDepth);
+$("poster-scene").addEventListener("pointerleave", () => {
+  if (!posterPointer) resetPosterDepth();
+});
+posterMotion.addEventListener("change", () => {
+  endPosterDrag();
+  resetPosterDepth();
+});
 $("poster-viewer-close").addEventListener("click", closePoster);
 $("poster-viewer").addEventListener("click", e => {
   if (e.target === $("poster-viewer") || e.target === $("poster-scene")) closePoster();
 });
 $("poster-viewer").addEventListener("close", () => {
+  endPosterDrag();
   resetPosterDepth();
   if ($("library-overlay").hidden) document.body.classList.remove("no-scroll");
   if (posterOpener?.isConnected) posterOpener.focus({ preventScroll: true });
